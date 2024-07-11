@@ -1,0 +1,158 @@
+1. Criar repositorio com readme e com gitgnore (visual studio). clona para maquina
+
+
+2. Criar solucao. comando:
+dotnet new sln --output MySolution
+
+
+3. Entra na pasta que foi criada a solucao "MySolution". Cria uma PROJETO WEB. comando:
+dotnet new web -n MinimalApiProject
+
+
+4.add o projeto dentro da uma solucao. comando:
+dotnet sln add NomeDoProjeto.
+
+
+5.instalar a biblioteca do banco banco:
+
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+
+6.cria pasta Models para adicionar as classe produto, appdatacontext e categoria produto.
+
+
+7.dentro do appdatacontext voce copia esse arquivo (importa algo caso for necessario) :
+
+using Microsoft.EntityFrameworkCore;
+
+public class AppDbContext : DbContext
+{
+    public DbSet<Produto> Produtos { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite("Data Source=nomeDoSeuBanco.db");
+    }
+}
+
+
+8. start no banco de dados, faz a primeira inicializacao. (verifica se nao a erros ou falta de chave primaria)
+
+dotnet ef migrations add InitialCreate
+dotnet ef migrations add Initial (comando do professor no video da prova A1)
+
+9. faz o update.
+dotnet ef database update
+
+
+
+10. no program voce configura seu banco e a api:
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SeuDbContext>();
+var app = builder.Build();
+
+
+11. Pega os bglh do program.C que voce ja tem no seu git.
+
+
+
+            ################################
+                        FRONT
+            ################################
+
+        imc.Valor = imc.Peso / (imc.Altura * imc.Altura);
+    
+        if (imc.Valor < 18.5)
+        {
+            return Results.BadRequest("Abaixo do peso");
+        }
+        if (imc.Valor >= 18.5 && imc.Valor < 24.9)
+        {
+            return Results.BadRequest("Peso normal");
+        }
+        if (imc.Valor >= 25 && imc.Valor < 29.9)
+        {
+            return Results.BadRequest("Sobrepeso");
+        }
+        if (imc.Valor >= 30 && imc.Valor < 34.9)
+        {
+            return Results.BadRequest("Obesidade grau 1");
+        }
+        if (imc.Valor >= 35 && imc.Valor < 39.9)
+        {
+            return Results.BadRequest("Obesidade grau 2");
+        }
+        if (imc.Valor >= 40)
+        {
+            return Results.BadRequest("Obesidade grau 3");
+        }
+
+
+1.criar o projeto do front DENTRO do repositorio.
+                     nome do seu projeto (front)
+npx create-react-app my-app --template typescript
+
+
+2.Apagar as coisas desnecessarias.
+
+3. roda a aplicacao pra ver se esta tudo certo.
+npm start
+
+
+4.pega e joga os projetos bases la pra depois instalar as bibliotecas.
+
+5. Instalar as bibliotecas.
+
+npm install react-router-dom
+
+npm install @types/react-router-dom
+
+
+6. no APP.TSX voce copia e cola do git, e altera, exporta, para conseguir navegar entre os (lista, casdastrar,  ect).
+
+
+7. voce pega tudo os bglh de front que o professor passar e cola na pasta pages dentro de cada um exemplo listar.
+
+
+
+
+
+
+8. ADICIONAR O CORS     ANTES DO BIULDER FILHA DA PUTA isso no program.c.
+
+var builder = WebApplication.CreateBuilder(args);
+
+//Registrar o serviço de banco de dados na aplicação
+builder.Services.AddDbContext<AppDataContext>();
+
+//Configurar a política de CORS
+builder.Services.AddCors(options =>
+    options.AddPolicy("Acesso Total",
+        configs => configs
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod())
+);
+
+var app = builder.Build();
+
+
+
+
+
+NAO ESQUECER DE COLOCAR A ULTIMA LINHA NO FINAL  se nao, nao ira funcionar:
+
+app.UseCors("Acesso Total");
+
+
+
+
+
+
+9. Arruma tudo e entrega ajeita tudo oq for necessario...........
+
+
+
