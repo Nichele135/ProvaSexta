@@ -78,37 +78,15 @@ app.MapPut("/api/tarefas/alterar/{id}", ([FromServices] AppDataContext ctx, [Fro
 //GET: http://localhost:5273/api/tarefas/naoconcluidas
 app.MapGet("/api/tarefas/naoconcluidas", ([FromServices] AppDataContext ctx) =>
 {
-    var tarefasNaoConcluidas = ctx.Tarefas
-        .Where(t => t.Status == "Não iniciada" || t.Status == "Em andamento")
-        .Include(x => x.Categoria)
-        .ToList();
+    return Results.Ok(ctx.Tarefas.Where(t => t.Status == "Não iniciada" || t.Status == "Em andamento").ToList());
 
-    if (tarefasNaoConcluidas.Any())
-    {
-        return Results.Ok(tarefasNaoConcluidas);
-    }
-    else
-    {
-        return Results.NotFound("Não há tarefas não concluídas!");
-    }
 });
 
 //GET: http://localhost:5273/tarefas/concluidas
 app.MapGet("/api/tarefas/concluidas", ([FromServices] AppDataContext ctx) =>
 {
-    var tarefasConcluidas = ctx.Tarefas
-        .Where(tarefa => tarefa.Status == "Concluída")
-        .Include(x => x.Categoria)
-        .ToList();
+        return Results.Ok(ctx.Tarefas.Where(t => t.Status == "Concluidas").ToList());
 
-    if (tarefasConcluidas.Any())
-    {
-        return Results.Ok(tarefasConcluidas);
-    }
-    else
-    {
-        return Results.NotFound("Não há tarefas concluídas!");
-    }
 });
 
 
