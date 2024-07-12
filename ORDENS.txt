@@ -1,0 +1,53 @@
+dotnet new sln --output MySolution
+
+dotnet new webapi --name NomeDoProjeto -f net8.0
+cd NomeDoProjeto
+
+
+dotnet sln add NomeDoProjeto (DENTRO DA PASTA SOLUTION)
+
+
+instalar os bglh do banco:
+
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+
+
+
+
+cria pasta Models para adicionar as classe produto, appdatacontext e categoria produto
+
+dentro do appdatacontext voce copia esse arquivo:
+
+using Microsoft.EntityFrameworkCore;
+
+public class AppDbContext : DbContext
+{
+    public DbSet<Produto> Produtos { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite("Data Source=nomeDoSeuBanco.db");
+    }
+}
+
+
+
+
+
+
+"dotnet ef" para verificar atualizacao.
+
+dotnet ef migrations add NomeDoBanco
+
+dotnet ef database update
+
+
+
+
+
+instalar o npm (front/react)
+
+
