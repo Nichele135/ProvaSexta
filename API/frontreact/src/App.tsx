@@ -8,9 +8,52 @@ import AlterarTarefa from "./pages/tarefa/alteral";
 function App() {
   return (
 <div>
-    <TarefaCadastrar/>
-    <TarefaListar/>
-    <AlterarTarefa/>
+<div>
+      <BrowserRouter>
+        <nav>
+          <ul>
+            <li>
+              <Link to={"/"}>Home</Link>
+            </li>
+            <li>
+              <Link to={"/pages/produto/listar"}>
+                Listar Produtos{" "}
+              </Link>
+            </li>
+            <li>
+              <Link to={"/pages/produto/cadastrar"}>
+                Cadastrar Produtos{" "}
+              </Link>
+            </li>
+            <li>
+              <Link to={"/pages/cep/consultar"}>Consultar CEP </Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<ProdutoListar />} />
+          <Route
+            path="/pages/produto/listar"
+            element={<ProdutoListar />}
+          />
+          <Route
+            path="/pages/produto/cadastrar"
+            element={<ProdutoCadastrar />}
+          />
+          <Route
+            path="/pages/cep/consultar"
+            element={<CepConsultar />}
+          />
+          <Route
+            path="/pages/produto/alterar/:id"
+            element={<ProdutoAlterar />}
+          />
+        </Routes>
+        <footer>
+          <p>Desenvolvido por Diogo Steinke Deconto</p>
+        </footer>
+      </BrowserRouter>
+    </div>
 
 </div>   
   );
